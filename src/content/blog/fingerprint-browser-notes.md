@@ -59,3 +59,9 @@ browserscan、pixelscan、creepjs、browserleaks 这些审计站，价值不在�
 4. 接口化（API / MCP）是把工具变成生产力杠杆的关键。
 
 后面有新的坑，继续记在这里。
+
+> 本篇已展开为「指纹深挖」系列：
+> [（一）你的浏览器正在暴露什么](/blog/fp-1-what-browsers-leak/) ｜
+> [（二）审计站到底在查什么](/blog/fp-2-audit-sites/) ｜
+> [（三）「自洽人设」工程](/blog/fp-3-consistent-persona/) ｜
+> [（四）让 AI 智能体接管指纹窗口](/blog/fp-4-agent-automation/)
