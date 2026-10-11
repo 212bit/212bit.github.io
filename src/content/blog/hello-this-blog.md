@@ -1,7 +1,7 @@
 ---
 title: 把折腾写成手记：这个博客是怎么搭起来的
 description: 给自己一个沉淀想法的地方。记录选型（Astro + GitHub Pages）与「纸上手记」设计风格的来龙去脉。
-date: 2026-09-15
+date: 2026-08-04
 tags: [随笔, Astro]
 ---
 

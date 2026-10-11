@@ -1,7 +1,7 @@
 ---
 title: 指纹深挖（二）：审计站到底在查什么
 description: browserscan / pixelscan / creepjs / browserleaks 各自查什么——四个真实案例说明「审计站看的东西，往往不是你以为的那个东西」。
-date: 2026-10-04
+date: 2026-09-13
 tags: [指纹浏览器, 反检测, 项目手记]
 ---
 
