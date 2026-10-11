@@ -12,11 +12,5 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
     "astro": "^5.14.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
   }
 }
