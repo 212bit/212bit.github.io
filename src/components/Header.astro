@@ -1,0 +1,31 @@
+---
+import { SITE } from '../consts';
+
+const path = Astro.url.pathname;
+const current = (prefix: string) =>
+  prefix === '/' ? path === '/' : path.startsWith(prefix);
+
+const links = [
+  { href: '/', label: '首页', match: '/' },
+  { href: '/blog/', label: '文章', match: '/blog' },
+  { href: '/projects/', label: '项目', match: '/projects' },
+  { href: '/about/', label: '关于', match: '/about' },
+];
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="wordmark" href="/" aria-label={`${SITE.title} 首页`}>
+      <span class="seal-stamp" aria-hidden="true">记</span>
+      <span class="en">212bit</span>
+      <span class="zh">技术手记</span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      {links.map((l) => (
+        <a href={l.href} aria-current={current(l.match) ? 'page' : undefined}>
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

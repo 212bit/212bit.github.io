@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../consts';
+---
+
+<Base title="关于" description="关于 212bit 与这个博客。">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>关于</h1>
+      <div class="profile-head">
+        <span class="seal-stamp" aria-hidden="true">记</span>
+        <p class="who">
+          212bit · 工程师<br />
+          浏览器自动化 / 指纹对抗 / AI 协作开发
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap-text post-body prose">
+      <p>
+        你好，我是 <strong>212bit</strong>（git 里叫 fu.yf）。日常在浏览器自动化与
+        指纹浏览器这条线上折腾：让批量窗口彼此独立、各自自洽，再让它们经得起
+        browserscan、pixelscan、creepjs 这些审计站的挑剔。
+      </p>
+      <p>
+        另一条主线是 AI 协作开发——把编码智能体当成真正的同事来设计工作流：
+        文档驱动、上下文预算、主从分工。这套博客背后的很多工作习惯，就来自
+        这些实践。
+      </p>
+      <h2>这里写什么</h2>
+      <ul>
+        <li>项目手记：正在做的系统，遇到的坑与取舍；</li>
+        <li>技术感悟：反复出现的问题背后，那些通用的道理；</li>
+        <li>工具与工作流：让一个人也能像一支小队一样干活的方法。</li>
+      </ul>
+      <blockquote>
+        <p>写作是第二次思考。很多当时想明白的事，写下来才发现还有一半是含糊的。</p>
+      </blockquote>
+      <h2>找到我</h2>
+      <p>
+        代码与项目在 <a href={SITE.github} target="_blank" rel="noopener">GitHub @{SITE.author}</a>，
+        文章更新可以订阅 <a href="/rss.xml">RSS</a>。
+      </p>
+      <h2>关于本站</h2>
+      <p>
+        本站用 <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
+        构建，纯静态输出，部署在 GitHub Pages；设计是暖纸底、衬线标题、
+        朱砂印章的「纸上手记」风格，源码即模板，想抄走改改就能用。
+      </p>
+    </div>
+  </div>
+</Base>

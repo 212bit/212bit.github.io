@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      prev: posts[i + 1] ?? null,
+      next: posts[i - 1] ?? null,
+    },
+  }));
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<Base title={post.data.title} description={post.data.description}>
+  <article class="wrap">
+    <div class="wrap-text">
+      <header class="page-head post-head">
+        <p class="meta">
+          <time datetime={fmt(post.data.date)}>{fmt(post.data.date)}</time>
+          {post.data.tags.map((t) => <span class="tag">{t}</span>)}
+        </p>
+        <h1>{post.data.title}</h1>
+        <p class="lede">{post.data.description}</p>
+        <div class="rule"></div>
+      </header>
+
+      <div class="post-body prose">
+        <Content />
+      </div>
+
+      <footer class="post-foot">
+        <a href="/blog/">← 返回全部文章</a>
+        <span>
+          {prev && <a href={`/blog/${prev.id}/`}>← 上一篇</a>}
+          {prev && next && <span aria-hidden="true"> · </span>}
+          {next && <a href={`/blog/${next.id}/`}>下一篇 →</a>}
+        </span>
+      </footer>
+    </div>
+  </article>
+</Base>

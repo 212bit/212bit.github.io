@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+let counter = 0;
+---
+
+<Base title="全部文章" description="按年份归档的全部技术手记。">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>全部文章</h1>
+      <p class="lede">共 {posts.length} 篇手记，按年份归档。写作即第二次思考。</p>
+    </header>
+
+    <div class="wrap-list">
+      {
+        [...byYear.entries()].map(([year, yearPosts]) => (
+          <section class="year-block">
+            <h2 class="year-head">{year}</h2>
+            <ol class="entries">
+              {yearPosts.map((post) => {
+                counter += 1;
+                return (
+                  <li class="entry">
+                    <span class="entry-no" aria-hidden="true">
+                      {String(counter).padStart(2, '0')}
+                    </span>
+                    <a class="entry-title" href={`/blog/${post.id}/`}>
+                      {post.data.title}
+                    </a>
+                    <div class="entry-body">
+                      <p class="entry-desc">{post.data.description}</p>
+                      <p class="entry-meta">
+                        <time datetime={fmt(post.data.date)}>
+                          {fmt(post.data.date)}
+                        </time>
+                        {post.data.tags.map((t) => (
+                          <span class="tag">{t}</span>
+                        ))}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</Base>

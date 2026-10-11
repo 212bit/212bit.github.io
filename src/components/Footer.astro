@@ -1,0 +1,18 @@
+---
+import { SITE } from '../consts';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap inner">
+    <span>© {year} {SITE.author}</span>
+    <span>
+      <a href={SITE.github} target="_blank" rel="noopener">GitHub</a>
+      <span aria-hidden="true"> · </span>
+      <a href="/rss.xml">RSS</a>
+      <span aria-hidden="true"> · </span>
+      由 Astro 驱动，部署于 GitHub Pages
+    </span>
+  </div>
+</footer>

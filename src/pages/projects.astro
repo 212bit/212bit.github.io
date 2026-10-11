@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../consts';
+
+type Status = 'active' | 'maintain' | 'private';
+
+interface Project {
+  name: string;
+  desc: string;
+  tags: string[];
+  status: Status;
+  statusLabel: string;
+  link?: string;
+}
+
+// 数据取自 GitHub 公开仓库描述与本地项目现状，改动直接编辑此数组即可
+const projects: Project[] = [
+  {
+    name: '防关联指纹浏览器',
+    desc: '给每个浏览器身份一套自洽的硬件指纹与运行时内核（RoxyChrome），用 lumi.conf 统一参数体系，通过 REST API 与 MCP 暴露给自动化客户端，让批量窗口既彼此隔离，又各自经得起审计站的检验。',
+    tags: ['Electron / CDP', 'MCP', '指纹对抗'],
+    status: 'private',
+    statusLabel: '未公开',
+  },
+  {
+    name: '文径 DocPath',
+    desc: '渐进式文档驱动工作流引擎——把「文档即有限状态机」的思路做成编码智能体（Codex / Claude Code / OpenCode）共享的任务生命周期底座。',
+    tags: ['CLI', '工作流引擎', 'AI Agent'],
+    status: 'active',
+    statusLabel: '活跃',
+    link: 'https://github.com/212bit/docpath',
+  },
+  {
+    name: 'zeroclaw',
+    desc: 'Fast, small, and fully autonomous AI assistant infrastructure — deploy anywhere, swap anything.',
+    tags: ['Rust', 'AI Infrastructure'],
+    status: 'active',
+    statusLabel: '活跃',
+    link: 'https://github.com/212bit/zeroclaw',
+  },
+  {
+    name: 'sign',
+    desc: '以 Node.js + Playwright 为核心的自动签到骨架，支持 GitHub Actions 与 Docker 运行，并通过 Telegram 通知结果。',
+    tags: ['Node.js', 'Playwright', 'GitHub Actions'],
+    status: 'maintain',
+    statusLabel: '维护中',
+    link: 'https://github.com/212bit/sign',
+  },
+  {
+    name: 'bitbrowser-automation',
+    desc: 'BitBrowser 批量账号处理自动化系统：FastAPI + Vue 3 + Playwright。',
+    tags: ['FastAPI', 'Vue 3', 'Playwright'],
+    status: 'maintain',
+    statusLabel: '维护中',
+    link: 'https://github.com/212bit/bitbrowser-automation',
+  },
+];
+---
+
+<Base title="项目" description="正在做与做过的事：指纹浏览器、工作流引擎、自动化骨架等。">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>项目</h1>
+      <p class="lede">正在做与做过的事。比起罗列技术栈，更想说明每个项目解决什么问题。</p>
+    </header>
+
+    <div class="wrap-list proj-list">
+      {
+        projects.map((p) => (
+          <section class="proj">
+            <h2 class="proj-name">
+              {p.link ? (
+                <a href={p.link} target="_blank" rel="noopener">
+                  {p.name}
+                </a>
+              ) : (
+                <span>{p.name}</span>
+              )}
+              <span class={`proj-status is-${p.status}`}>{p.statusLabel}</span>
+            </h2>
+            <p class="proj-desc">{p.desc}</p>
+            <p class="proj-meta">{p.tags.join(' · ')}</p>
+          </section>
+        ))
+      }
+    </div>
+
+    <p style="margin-top: 1.6rem; font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-3);">
+      更多见 <a href={SITE.github} target="_blank" rel="noopener" style="color: var(--seal);">GitHub @{SITE.author}</a>
+    </p>
+  </div>
+</Base>

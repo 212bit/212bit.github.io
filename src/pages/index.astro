@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../consts';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const posts = allPosts.slice(0, 5);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<Base>
+  <div class="wrap">
+    <section class="hero">
+      <span class="hero-mark" aria-hidden="true">记</span>
+      <p class="overline rise rise-1">{SITE.overline}</p>
+      <h1 class="rise rise-2">把折腾，<br />写成<em>手记</em>。</h1>
+      <p class="sub rise rise-3">
+        这里是 {SITE.author} 的技术博客。做过的项目、踩过的坑、想明白的事——
+        关于指纹浏览器、浏览器自动化、AI 协作开发的观察与感悟，都记在这里。
+      </p>
+      <p class="meta rise rise-4">
+        <span>手记 {allPosts.length} 篇</span>
+        <span aria-hidden="true">·</span>
+        <a href="/rss.xml">RSS 订阅</a>
+        <span aria-hidden="true">·</span>
+        <a href={SITE.github} target="_blank" rel="noopener">GitHub @{SITE.author}</a>
+      </p>
+    </section>
+
+    <section class="rise rise-5">
+      <div class="sec-head">
+        <h2>最新手记</h2>
+        <a href="/blog/">全部文章 →</a>
+      </div>
+      <ol class="entries">
+        {posts.map((post, i) => (
+          <li class="entry">
+            <span class="entry-no" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <a class="entry-title" href={`/blog/${post.id}/`}>{post.data.title}</a>
+            <div class="entry-body">
+              <p class="entry-desc">{post.data.description}</p>
+              <p class="entry-meta">
+                <time datetime={fmt(post.data.date)}>{fmt(post.data.date)}</time>
+                {post.data.tags.map((t) => <span class="tag">{t}</span>)}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </div>
+</Base>
