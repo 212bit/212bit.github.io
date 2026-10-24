@@ -6,6 +6,7 @@ tags: [AI, 工作流, Agent, 方法论]
 ---
 
 > 读帖笔记。原帖：[【vibe coding教程】如何正确的开始vibe coding](https://linux.do/t/topic/2993279)（LINUX DO，作者 gpt1，2026-10-08，373 reactions / 3.7k 浏览）。原帖的观点，拆解和不同意见属于我。
+> 本文也是「Vibe Coding 实战手册」的番外，系列正文从[动工之前，先过两道工序](/blog/vibe-1-before-coding/)开始。
 
 收藏夹里的热帖很多，真按它做完一遍的很少。这篇值得认真读一次的原因很简单：它讲的不是「怎么写 prompt」，而是**把传统软件工程压缩成单人 + Agent 的工作流**。以下按我的拆法重组，不逐段复述。
 
